@@ -33,7 +33,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             ProductosTheme {
-                AppBar()
+                ProductApp()
             }
         }
     }
