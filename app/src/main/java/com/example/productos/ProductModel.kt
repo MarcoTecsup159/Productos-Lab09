@@ -1,0 +1,11 @@
+package com.example.productos
+
+import com.google.gson.annotations.SerializedName
+
+data class ProductModel(
+    @SerializedName("id") val id: int,
+    @SerializedName("title") val title: String,
+    @SerializedName("description") val description: String,
+    @SerializedName("price") val price: Double,
+    @SerializedName("thumbnail") val thumbnail: String
+)
