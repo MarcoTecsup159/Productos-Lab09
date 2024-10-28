@@ -8,11 +8,18 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Favorite
+import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -49,7 +56,10 @@ fun ProductApp() {
 
     Scaffold(
         topBar = { AppBar() },
-        content = { paddingValues -> AppContent(paddingValues, navController, servicio) }
+        bottomBar = { BottomNavigationBar(navController) },
+        content = { paddingValues ->
+            AppContent(paddingValues, navController, servicio)
+        }
     )
 }
 
@@ -57,8 +67,25 @@ fun ProductApp() {
 @Composable
 fun AppBar() {
     TopAppBar(
-        title = { Text("Product Browser", color = Color.White) },
+        title = { Text("Productos", color = Color.White) },
+        colors = TopAppBarDefaults.topAppBarColors(
+            containerColor = MaterialTheme.colorScheme.primary
+        )
     )
+}
+
+@Composable
+fun BottomNavigationBar(navController: NavHostController) {
+    NavigationBar(
+        containerColor = Color.LightGray
+    ) {
+        NavigationBarItem(
+            icon = { Icon(Icons.Outlined.Home, contentDescription = "Products") },
+            label = { Text("Productos") },
+            selected = navController.currentDestination?.route == "products",
+            onClick = { navController.navigate("products") }
+        )
+    }
 }
 
 @Composable
